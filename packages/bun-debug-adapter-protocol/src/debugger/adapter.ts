@@ -1867,11 +1867,10 @@ export class DebugAdapter extends EventEmitter<DebugAdapterEventMap> implements 
       variables = variable;
     } else {
       variables = await this.#getProperties(variable, start, count);
+      variables.sort(variablesSortBy);
     }
 
-    return {
-      variables: variables.sort(variablesSortBy),
-    };
+    return { variables };
   }
 
   async setVariable(request: DAP.SetVariableRequest): Promise<DAP.SetVariableResponse> {
